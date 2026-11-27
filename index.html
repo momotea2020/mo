@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mỡ Mỡ Milk Tea House — Sheridan, CO</title>
+  <meta name="description" content="Mo Mo Tea in Sheridan, CO — fresh milk tea, boba, smoothies, Vietnamese coffee and snacks. Open Sunday–Saturday 11:00 AM–8:45 PM. Order online." />
+  <style>
+    :root {
+      --cream: #FFF8E7;
+      --cream-soft: #FFFBEB;
+      --amber: #D97706;
+      --amber-dark: #92400E;
+      --green: #2A5A3B;
+      --green-dark: #1B3E27;
+      --ink: #29180C;
+      --muted: #6B5D4F;
+      --card: #FFFFFF;
+      --line: #FCD34D;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--cream);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.55;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: var(--amber-dark); }
+
+    /* ---------- Top bar ---------- */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255, 251, 235, 0.97);
+      border-bottom: 2px solid var(--line);
+      backdrop-filter: blur(4px);
+    }
+    .topbar-inner {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 8px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .topbar .logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--line);
+      flex-shrink: 0;
+    }
+    .topbar .name {
+      font-weight: 800;
+      font-size: 17px;
+      line-height: 1.2;
+      flex: 1;
+      min-width: 0;
+    }
+    .topbar .name small {
+      display: block;
+      font-weight: 600;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* ---------- Buttons ---------- */
+    .btn {
+      display: inline-block;
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 15px;
+      text-decoration: none;
+      text-align: center;
+      border: 2px solid transparent;
+      cursor: pointer;
+    }
+    .btn-order {
+      background: var(--amber);
+      color: #fff;
+      white-space: nowrap;
+    }
+    .btn-call {
+      background: var(--green);
+      color: #fff;
+      white-space: nowrap;
+    }
+    .btn-ghost {
+      background: #fff;
+      color: var(--amber-dark);
+      border-color: var(--amber);
+    }
+    .topbar .btn { padding: 8px 12px; font-size: 14px; }
+
+    /* ---------- Layout ---------- */
+    .wrap { max-width: 720px; margin: 0 auto; padding: 0 16px 48px; }
+    section { margin-top: 28px; }
+    h1 { font-size: 34px; line-height: 1.15; margin: 0 0 8px; }
+    h2 {
+      font-size: 24px;
+      margin: 0 0 4px;
+      padding-bottom: 6px;
+      border-bottom: 3px solid var(--line);
+    }
+    h3 { font-size: 18px; margin: 18px 0 6px; color: var(--green-dark); }
+    .section-sub { color: var(--muted); margin: 0 0 12px; }
+
+    /* ---------- Hero ---------- */
+    .hero { text-align: center; padding-top: 28px; }
+    .hero .logo-big {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--line);
+      margin: 0 auto 14px;
+    }
+    .tagline {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--green);
+      margin: 0 0 10px;
+    }
+    .hero p { margin: 4px 0; }
+    .hero .actions { margin-top: 18px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+    .quicknav { margin-top: 22px; display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+    .quicknav a {
+      padding: 7px 14px;
+      border-radius: 999px;
+      background: #fff;
+      border: 1.5px solid var(--line);
+      color: var(--amber-dark);
+      font-weight: 700;
+      font-size: 14px;
+      text-decoration: none;
+    }
+
+    /* ---------- Visit / hours ---------- */
+    .card {
+      background: var(--card);
+      border: 2px solid var(--line);
+      border-radius: 16px;
+      padding: 16px 18px;
+      margin-top: 12px;
+      box-shadow: 0 4px 14px rgba(146, 64, 14, 0.06);
+    }
+    .hours-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 6px 0;
+      border-bottom: 1px dashed #EAD9B8;
+    }
+    .hours-row:last-child { border-bottom: none; }
+    .hours-row strong { font-weight: 800; }
+    .visit-line { margin: 8px 0; }
+    .visit-line a { font-weight: 700; }
+
+    /* ---------- Menu ---------- */
+    .price-pill {
+      display: inline-block;
+      background: var(--cream-soft);
+      border: 1.5px solid var(--line);
+      color: var(--amber-dark);
+      font-weight: 800;
+      font-size: 14px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      margin: 2px 4px 2px 0;
+    }
+    .note {
+      background: var(--cream-soft);
+      border-left: 4px solid var(--amber);
+      padding: 10px 12px;
+      border-radius: 8px;
+      margin: 12px 0;
+      font-size: 14.5px;
+    }
+    .note.green { border-left-color: var(--green); }
+    ul.flavors { columns: 2; margin: 6px 0 4px; padding-left: 20px; }
+    ul.flavors li { break-inside: avoid; margin-bottom: 3px; }
+    ul.toppings { columns: 2; margin: 6px 0 4px; padding-left: 20px; }
+    ul.toppings li { break-inside: avoid; margin-bottom: 3px; }
+
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .photo-card {
+      background: var(--card);
+      border: 2px solid var(--line);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    .photo-card img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+    }
+    .photo-card .body { padding: 10px 12px 12px; }
+    .photo-card .name { font-weight: 800; font-size: 15px; line-height: 1.3; }
+    .photo-card .desc { font-size: 13.5px; color: var(--muted); margin: 2px 0 6px; }
+    .photo-card .price { font-weight: 800; color: var(--amber-dark); }
+    .photo-card .flavors-line { font-size: 13px; color: var(--muted); }
+
+    .snack-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 8px 0;
+      border-bottom: 1px dashed #EAD9B8;
+    }
+    .snack-row:last-child { border-bottom: none; }
+    .snack-row .price { font-weight: 800; color: var(--amber-dark); white-space: nowrap; }
+
+    /* ---------- Footer ---------- */
+    footer {
+      margin-top: 40px;
+      background: var(--green-dark);
+      color: #F5F5F4;
+      padding: 28px 16px 36px;
+      text-align: center;
+    }
+    footer .inner { max-width: 720px; margin: 0 auto; }
+    footer a { color: #FCD34D; font-weight: 700; }
+    footer p { margin: 6px 0; font-size: 15px; }
+    footer .social { margin: 10px 0; font-size: 16px; }
+    footer .social a { margin: 0 10px; }
+    footer .fine { font-size: 13px; opacity: 0.85; margin-top: 14px; }
+  </style>
+</head>
+<body>
+
+  <!-- ============ Sticky top bar ============ -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <img class="logo" src="logo.jpg" alt="Mỡ Mỡ Milk Tea House logo" loading="lazy" onerror="this.style.display='none'" />
+      <div class="name">Mỡ Mỡ Milk Tea House<small>Sheridan, CO</small></div>
+      <a class="btn btn-order" href="https://mo-mo-tea-sheridan-2.cloveronline.com/menu/all">Order Online</a>
+      <a class="btn btn-call" href="tel:+13037614017">Call</a>
+    </div>
+  </header>
+
+  <main class="wrap">
+
+    <!-- ============ Hero ============ -->
+    <section class="hero">
+      <img class="logo-big" src="logo.jpg" alt="Mỡ Mỡ Milk Tea House logo" loading="lazy" onerror="this.style.display='none'" />
+      <h1>Mỡ Mỡ Milk Tea House</h1>
+      <p class="tagline">Passion for healthy tea</p>
+      <p>3602 River Point Pkwy Unit C<br />Sheridan, CO 80110</p>
+      <p>Open Sunday–Saturday, 11:00 AM – 8:45 PM</p>
+      <div class="actions">
+        <a class="btn btn-order" href="https://mo-mo-tea-sheridan-2.cloveronline.com/menu/all">Order Online</a>
+        <a class="btn btn-call" href="tel:+13037614017">Call (303) 761-4017</a>
+      </div>
+      <div class="quicknav">
+        <a href="#menu">Menu</a>
+        <a href="#visit">Hours &amp; Visit</a>
+        <a href="#customize">Customize Your Cup</a>
+      </div>
+    </section>
+
+    <!-- ============ Hours & Visit ============ -->
+    <section id="visit">
+      <h2>Hours &amp; Visit</h2>
+      <div class="card">
+        <div class="hours-row"><span><strong>Sunday – Saturday</strong></span><span><strong>11:00 AM – 8:45 PM</strong></span></div>
+        <p class="visit-line"><strong>Address:</strong><br />3602 River Point Pkwy Unit C, Sheridan, CO 80110</p>
+        <p class="visit-line"><strong>Phone:</strong> <a href="tel:+13037614017">(303) 761-4017</a></p>
+        <p style="margin-top: 14px;">
+          <a class="btn btn-ghost" href="https://www.google.com/maps/search/?api=1&amp;query=Mo+Mo+Tea+3602+River+Point+Pkwy+Sheridan+CO+80110">Get Directions</a>
+          <a class="btn btn-order" href="https://mo-mo-tea-sheridan-2.cloveronline.com/menu/all">Order Online</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ Menu ============ -->
+    <section id="menu">
+      <h2>Menu</h2>
+      <p class="section-sub">Fresh whole milk by default. Almond, coconut &amp; soy milk available — just ask.</p>
+
+      <!-- Milk Tea House -->
+      <h3>Milk Tea House</h3>
+      <p>
+        <span class="price-pill">M $5.50</span>
+        <span class="price-pill">L $6.50</span>
+        <span class="price-pill">Bucket 32oz $7.75</span>
+      </p>
+      <div class="photo-grid">
+        <div class="photo-card">
+          <img src="traditional_milktea.jpg" alt="Traditional milk tea" loading="lazy" onerror="this.style.display='none'" />
+          <div class="body"><div class="name">Traditional</div><div class="price">M $5.50 • L $6.50</div></div>
+        </div>
+        <div class="photo-card">
+          <img src="thai_tea.jpg" alt="Thai Tea" loading="lazy" onerror="this.style.display='none'" />
+          <div class="body"><div class="name">Thai Tea</div><div class="price">M $5.50 • L $6.50</div></div>
+        </div>
+        <div class="photo-card">
+          <img src="matcha_milktea.jpg" alt="Matcha milk tea" loading="lazy" onerror="this.style.display='none'" />
+          <div class="body"><div class="name">Matcha</div><div class="price">M $5.50 • L $6.50</div></div>
+        </div>
+        <div class="photo-card">
+          <img src="taro_milktea.jpg" alt="Taro milk tea" loading="lazy" onerror="this.style.display='none'" />
+          <div class="body"><div class="name">Taro</div><div class="price">M $5.50 • L $6.50</div></div>
+        </div>
+      </div>
+      <p><strong>Classic &amp; Rich (11):</strong></p>
+      <ul class="flavors">
+        <li>Traditional</li>
+        <li>Thai Tea</li>
+        <li>Taro</li>
+        <li>Matcha</li>
+        <li>Oolong</li>
+        <li>Honey Oolong</li>
+        <li>Coffee Milk</li>
+        <li>Coconut</li>
+        <li>Vanilla</li>
+        <li>Caramel</li>
+        <li>Chocolate</li>
+      </ul>
+      <p><strong>Floral &amp; Herbal (4):</strong></p>
+      <ul class="flavors">
+        <li>Jasmine</li>
+        <li>Rose</li>
+        <li>Lavender</li>
+        <li>Mint</li>
+      </ul>
+      <p><strong>Fruit Milk Teas (6):</strong></p>
+      <ul class="flavors">
+        <li>Strawberry</li>
+        <li>Peach</li>
+        <li>Watermelon</li>
+        <li>Green Apple</li>
+        <li>Guava</li>
+        <li>Dragon Fruit</li>
+      </ul>
+      <div class="note">Fresh whole milk by default; almond, coconut &amp; soy available.</div>
+
+      <!-- WOW Milk Series -->
+      <h3>WOW Milk Series</h3>
+      <p>
+        <span class="price-pill">M $5.75</span>
+        <span class="price-pill">L $6.75</span>
+      </p>
+      <p class="section-sub">Fresh dark brown sugar &amp; tiger walls.</p>
+      <div class="photo-grid">
+        <div class="photo-card">
+          <img src="brown_sugar_pearl.jpg" alt="Brown Sugar Milk" loading="lazy" onerror="this.style.display='none'" />
+          <div class="body"><div class="name">Brown Sugar Milk</div><div class="desc">Torched fresh dark brown sugar syrup &amp; cold fresh milk.</div><div class="price">M $5.75 • L $6.75</div></div>
+        </div>
+        <div class="photo-card">
+          <img src="brown_sugar_strawberry.jpg" alt="Brown Sugar Strawberry" loading="lazy" onerror="this.style.display='none'" />
+          <div class="body"><div class="name">Brown Sugar Strawberry</div><div class="desc">Crushed strawberries layered with warm dark brown sugar.</div><div class="price">M $5.75 • L $6.75</div></div>
+        </div>
+        <div class="photo-card">
+          <img src="brown_sugar_dalgona.jpg" alt="Brown Sugar Dalgona Coffee" loading="lazy" onerror="this.style.display='none'" />
+          <div class="body"><div class="name">Brown Sugar Dalgona Coffee</div><div class="desc">Whipped golden espresso foam over dark brown sugar &amp; milk.</div><div class="price">M $5.75 • L $6.75</div></div>
+        </div>
+        <div class="photo-card">
+          <img src="brown_sugar_matcha.jpg" alt="Brown Sugar Matcha" loading="lazy" onerror="this.style.display='none'" />
+          <div class="body"><div class="name">Brown Sugar Matcha</div><div class="desc">Japanese Uji green tea &amp; milk.</div><div class="price">M $5.75 • L $6.75</div></div>
+        </div>
+        <div class="photo-card">
+          <img src="okinawa_oreo.jpg" alt="Okinawa Oreo Cream" loading="lazy" onerror="this.style.display='none'" />
+          <div class="body"><div class="name">Okinawa Oreo Cream</div><div class="desc">Roasted sugar, Oreo &amp; milk cream.</div><div class="price">M $5.75 • L $6.75</div></div>
+        </div>
+      </div>
+      <div class="note">Boba not included — add boba +$0.75. Shake 15 times before drinking for best flavor!</div>
+
+      <!-- Tea Bar -->
+      <h3>Tea Bar</h3>
+      <p>
+        <span class="price-pill">M $5.75</span>
+        <span class="price-pill">L $6.75</span>
+      </p>
+      <p><strong>Classic Brews</strong> — <span class="price-pill">M $4.50</span> <span class="price-pill">L $5.50</span></p>
+      <ul class="flavors">
+        <li>Black Tea</li>
+        <li>Jasmine Tea</li>
+        <li>Oolong Tea</li>
+        <li>Lotus Tea</li>
+      </ul>
+      <p><strong>Floral Infusions:</strong></p>
+      <ul class="flavors">
+        <li>Rose Green Tea</li>
+        <li>Very Berry Hibiscus</li>
+        <li>Butterfly Pea Flower</li>
+      </ul>
+      <p><strong>Real Fruit Teas:</strong></p>
+      <ul class="flavors">
+        <li>Peach Iced Tea</li>
+        <li>Mango Green Tea</li>
+        <li>Strawberry Tea</li>
+        <li>Orange Lemongrass Peach</li>
+        <li>Orange Lemongrass Lychee</li>
+        <li>Tropical Fruits Tea</li>
+        <li>Passion Fruit Tea</li>
+      </ul>
+      <div class="photo-grid">
+        <div class="photo-card">
+          <img src="lychee_iced_tea.jpg" alt="Lychee Iced Tea" loading="lazy" onerror="this.style.display='none'" />
+          <div class="body"><div class="name">Lychee Iced Tea</div><div class="desc">Crisp brewed tea infused with sweet fragrant lychee.</div><div class="price">M $5.75 • L $6.75</div></div>
+        </div>
+        <div class="photo-card">
+          <img src="guava_lotus_tea.jpg" alt="Guava Lotus Tea" loading="lazy" onerror="this.style.display='none'" />
+          <div class="body"><div class="name">Guava Lotus Tea</div><div class="desc">Aromatic lotus flower tea shaken with tropical guava.</div><div class="price">M $5.75 • L $6.75</div></div>
+        </div>
+        <div class="photo-card">
+          <img src="winter_melon_herbal.jpg" alt="Winter Melon Herbal" loading="lazy" onerror="this.style.display='none'" />
+          <div class="body"><div class="name">Winter Melon Herbal</div><div class="desc">Traditional slow-brewed refreshing winter melon tea.</div><div class="price">M $5.75 • L $6.75</div></div>
+        </div>
+        <div class="photo-card">
+          <img src="pineapple_thai_wall.jpg" alt="Pineapple Thai Wall" loading="lazy" onerror="this.style.display='none'" />
+          <div class="body"><div class="name">Pineapple Thai Wall</div><div class="desc">Spiced Thai tea striped with caramelized sweet pineapple.</div><div class="price">M $5.75 • L $6.75</div></div>
+        </div>
+        <div class="photo-card">
+          <img src="strawberry_thai_walls.jpg" alt="Strawberry Thai Walls" loading="lazy" onerror="this.style.display='none'" />
+          <div class="body"><div class="name">Strawberry Thai Walls</div><div class="desc">Sweet Thai tea layered with real strawberry cream walls.</div><div class="price">M $5.75 • L $6.75</div></div>
+        </div>
+      </div>
+
+      <!-- Smoothies -->
+      <h3>Smoothies</h3>
+      <p>
+        <span class="price-pill">M $5.50</span>
+        <span class="price-pill">L $6.50</span>
+      </p>
+      <p class="section-sub">Real fruit • Ice blended.</p>
+      <div class="photo-grid">
+        <div class="photo-card">
+          <img src="coffee_smoothie.jpg" alt="Coffee Smoothie" loading="lazy" onerror="this.style.display='none'" />
+          <div class="body"><div class="name">Coffee Smoothie</div><div class="desc">Bold roasted coffee blended frosty cold with sweet milk cream.</div><div class="price">M $5.50 • L $6.50</div></div>
+        </div>
+      </div>
+      <p><strong>Real Fruit &amp; Tropical (15):</strong></p>
+      <ul class="flavors">
+        <li>Avocado</li>
+        <li>Strawberry</li>
+        <li>Straw/Banana</li>
+        <li>Mango</li>
+        <li>Peach</li>
+        <li>Dragon Fruit</li>
+        <li>Watermelon</li>
+        <li>Passion Fruit</li>
+        <li>Pineapple</li>
+        <li>Piña Colada</li>
+        <li>Lychee</li>
+        <li>Kiwi</li>
+        <li>Green Apple</li>
+        <li>Honeydew</li>
+        <li>Banana</li>
+      </ul>
+      <p><strong>Creamy &amp; Frappes (10):</strong></p>
+      <ul class="flavors">
+        <li>Coffee</li>
+        <li>Mocha</li>
+        <li>Rich Cocoa</li>
+        <li>Cookies &amp; Cream</li>
+        <li>Coconut</li>
+        <li>Vanilla</li>
+        <li>Taro</li>
+        <li>Thai Tea</li>
+        <li>Milk Tea</li>
+        <li>Matcha</li>
+      </ul>
+
+      <!-- Specials -->
+      <h3>Specials</h3>
+      <p><span class="price-pill">One size $6.75</span></p>
+      <div class="photo-grid">
+        <div class="photo-card">
+          <img src="fire_tiger.jpg" alt="Fire Tiger Milk" loading="lazy" onerror="this.style.display='none'" />
+          <div class="body"><div class="name">Fire Tiger Milk</div><div class="desc">Torched sugar, caramelized walls.</div><div class="price">$6.75</div></div>
+        </div>
+        <div class="photo-card">
+          <img src="mangonada.jpg" alt="Mangonada Slush" loading="lazy" onerror="this.style.display='none'" />
+          <div class="body"><div class="name">Mangonada Slush</div><div class="desc">Chamoy &amp; tajín.</div><div class="price">$6.75</div></div>
+        </div>
+        <div class="photo-card">
+          <img src="yakult_slush.jpg" alt="Yakult Milk Slush" loading="lazy" onerror="this.style.display='none'" />
+          <div class="body"><div class="name">Yakult Milk Slush</div><div class="desc">Tangy probiotic Yakult blended icy cold.</div><div class="flavors-line">Original • Strawberry • Kiwi • Orange</div><div class="price">$6.75</div></div>
+        </div>
+        <div class="photo-card">
+          <img src="tamarind_ice.jpg" alt="Tamarind Ice" loading="lazy" onerror="this.style.display='none'" />
+          <div class="body"><div class="name">Tamarind Ice</div><div class="desc">Tangy tamarind &amp; roasted peanuts.</div><div class="price">$6.75</div></div>
+        </div>
+        <div class="photo-card">
+          <img src="milo_ice.jpg" alt="Milo Shaved Ice" loading="lazy" onerror="this.style.display='none'" />
+          <div class="body"><div class="name">Milo Shaved Ice</div><div class="desc">Milo cocoa snow, Oreo &amp; pudding.</div><div class="price">$6.75</div></div>
+        </div>
+      </div>
+      <p><strong>Vietnamese Coffee</strong> — <span class="price-pill">M $5.50</span> <span class="price-pill">L $6.50</span></p>
+      <ul class="flavors">
+        <li>Vietnamese Coffee — Cà Phê Sữa Đá / Nóng. Dark Robusta drip with condensed milk.</li>
+        <li>Salt Cream Coffee — Cà Phê Muối. Layered with salted sweet cream.</li>
+      </ul>
+
+      <!-- Popular Snacks -->
+      <h3>Popular Snacks</h3>
+      <p class="section-sub">Baked &amp; toasted fresh to order • Hot street bites.</p>
+      <div class="photo-grid">
+        <div class="photo-card">
+          <img src="pandan_waffle.jpg" alt="Pandan Waffle" loading="lazy" onerror="this.style.display='none'" />
+          <div class="body"><div class="name">Pandan Waffle</div><div class="desc">Crispy honeycomb crust with chewy pandan mochi core.</div><div class="price">$4.95</div></div>
+        </div>
+        <div class="photo-card">
+          <img src="mango_sticky_rice.jpg" alt="Sweet Sticky Rice with Mango" loading="lazy" onerror="this.style.display='none'" />
+          <div class="body"><div class="name">Sweet Sticky Rice w/ Mango</div><div class="desc">Ripe mango slices, warm coconut sticky rice &amp; sesame.</div><div class="price">$8.95</div></div>
+        </div>
+        <div class="photo-card">
+          <img src="vietnamese_hotdog.jpg" alt="Vietnamese Hotdog" loading="lazy" onerror="this.style.display='none'" />
+          <div class="body"><div class="name">Vietnamese Hotdog</div><div class="desc">Crispy baguette roll filled with savory sausage &amp; pâté.</div><div class="price">$5.95</div></div>
+        </div>
+        <div class="photo-card">
+          <img src="flan_cake.jpg" alt="Caramel Flan Cake" loading="lazy" onerror="this.style.display='none'" />
+          <div class="body"><div class="name">Caramel Flan Cake</div><div class="desc">Steamed egg custard drenched in caramel &amp; crushed ice.</div><div class="price">$4.50</div></div>
+        </div>
+      </div>
+      <div class="note green">Combo: pair any hot snack with a Large Milk Tea for $1.00 off.</div>
+    </section>
+
+    <!-- ============ Customize Your Cup ============ -->
+    <section id="customize">
+      <h2>Customize Your Cup</h2>
+      <p class="section-sub">Tailored exactly how you like it — 4 simple steps.</p>
+      <div class="card">
+        <p><strong>1. Size</strong><br />Medium (16oz) • Large (24oz) • Bucket (32oz)</p>
+        <p><strong>2. Sweetness</strong><br />0% • 25% • 50% • 75% • 100%</p>
+        <p><strong>3. Ice</strong><br />No Ice • Light Ice • Regular Ice</p>
+        <p><strong>4. Add-on Toppings — +$0.75 each (15 choices)</strong></p>
+        <ul class="toppings">
+          <li>Tapioca Boba</li>
+          <li>Mango Popping</li>
+          <li>Strawberry Popping</li>
+          <li>Lychee Popping</li>
+          <li>Crystal Original</li>
+          <li>Brown Sugar Jelly</li>
+          <li>Crystal Mango</li>
+          <li>Crystal Taro</li>
+          <li>Coconut Jelly</li>
+          <li>Lychee Jelly</li>
+          <li>Coffee Jelly</li>
+          <li>Rainbow Jelly</li>
+          <li>Grass Jelly</li>
+          <li>Egg Pudding</li>
+          <li>Milk Foam</li>
+        </ul>
+      </div>
+      <p style="text-align:center; margin-top: 20px;">
+        <a class="btn btn-order" href="https://mo-mo-tea-sheridan-2.cloveronline.com/menu/all">Order Online</a>
+      </p>
+    </section>
+
+  </main>
+
+  <!-- ============ Footer ============ -->
+  <footer>
+    <div class="inner">
+      <p><strong>Mỡ Mỡ Milk Tea House</strong></p>
+      <p class="social">
+        <a href="https://www.facebook.com/100063489637629/">Facebook</a>
+        <a href="https://www.instagram.com/momotea012020/">Instagram</a>
+      </p>
+      <p>3602 River Point Pkwy Unit C, Sheridan, CO 80110</p>
+      <p><a href="tel:+13037614017">(303) 761-4017</a></p>
+      <p>Open Sunday–Saturday, 11:00 AM – 8:45 PM</p>
+      <p class="fine">Menu prices in store.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
