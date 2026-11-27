@@ -221,6 +221,68 @@
     .snack-row:last-child { border-bottom: none; }
     .snack-row .price { font-weight: 800; color: var(--amber-dark); white-space: nowrap; }
 
+    /* ---------- Photo slideshow ---------- */
+    .slideshow {
+      position: relative;
+      border: 2px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 4px 14px rgba(146, 64, 14, 0.08);
+      margin-top: 12px;
+    }
+    .slide { display: none; }
+    .slide.active { display: block; }
+    .slide img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+    }
+    .slide .caption {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      background: #fff;
+    }
+    .slide .caption .name { font-weight: 800; font-size: 17px; }
+    .slide .caption .price { font-weight: 800; color: var(--amber-dark); white-space: nowrap; }
+    .slide-btn {
+      position: absolute;
+      top: 38%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(255, 248, 231, 0.92);
+      color: var(--amber-dark);
+      font-size: 22px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+    }
+    .slide-btn.prev { left: 10px; }
+    .slide-btn.next { right: 10px; }
+    .slide-dots {
+      display: flex;
+      gap: 7px;
+      justify-content: center;
+      padding: 10px 0 12px;
+      background: #fff;
+    }
+    .slide-dots button {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: none;
+      background: #EAD9B8;
+      cursor: pointer;
+      padding: 0;
+    }
+    .slide-dots button.active { background: var(--amber); }
+
     /* ---------- Footer ---------- */
     footer {
       margin-top: 40px;
@@ -263,10 +325,68 @@
         <a class="btn btn-call" href="tel:+13037614017">Call (303) 761-4017</a>
       </div>
       <div class="quicknav">
+        <a href="#photos">Photos</a>
         <a href="#menu">Menu</a>
         <a href="#visit">Hours &amp; Visit</a>
         <a href="#customize">Customize Your Cup</a>
         <a href="#rewards">Rewards</a>
+      </div>
+    </section>
+
+    <!-- ============ Photo slideshow ============ -->
+    <section id="photos">
+      <div class="slideshow" id="slideshow">
+        <div class="slide active">
+          <img src="traditional_milktea.jpg" alt="Traditional milk tea" />
+          <div class="caption"><span class="name">Traditional Milk Tea</span><span class="price">M $5.50 • L $6.50</span></div>
+        </div>
+        <div class="slide">
+          <img src="thai_tea.jpg" alt="Thai Tea" />
+          <div class="caption"><span class="name">Thai Tea</span><span class="price">M $5.50 • L $6.50</span></div>
+        </div>
+        <div class="slide">
+          <img src="matcha_milktea.jpg" alt="Matcha milk tea" />
+          <div class="caption"><span class="name">Matcha</span><span class="price">M $5.50 • L $6.50</span></div>
+        </div>
+        <div class="slide">
+          <img src="taro_milktea.jpg" alt="Taro milk tea" />
+          <div class="caption"><span class="name">Taro</span><span class="price">M $5.50 • L $6.50</span></div>
+        </div>
+        <div class="slide">
+          <img src="brown_sugar_pearl.jpg" alt="Brown Sugar Milk" />
+          <div class="caption"><span class="name">Brown Sugar Milk</span><span class="price">M $5.75 • L $6.75</span></div>
+        </div>
+        <div class="slide">
+          <img src="brown_sugar_strawberry.jpg" alt="Brown Sugar Strawberry" />
+          <div class="caption"><span class="name">Brown Sugar Strawberry</span><span class="price">M $5.75 • L $6.75</span></div>
+        </div>
+        <div class="slide">
+          <img src="fire_tiger.jpg" alt="Fire Tiger Milk" />
+          <div class="caption"><span class="name">Fire Tiger Milk</span><span class="price">$6.75</span></div>
+        </div>
+        <div class="slide">
+          <img src="mangonada.jpg" alt="Mangonada Slush" />
+          <div class="caption"><span class="name">Mangonada Slush</span><span class="price">$6.75</span></div>
+        </div>
+        <div class="slide">
+          <img src="yakult_slush.jpg" alt="Yakult Milk Slush" />
+          <div class="caption"><span class="name">Yakult Milk Slush</span><span class="price">$6.75</span></div>
+        </div>
+        <div class="slide">
+          <img src="tamarind_ice.jpg" alt="Tamarind Ice" />
+          <div class="caption"><span class="name">Tamarind Ice</span><span class="price">$6.75</span></div>
+        </div>
+        <div class="slide">
+          <img src="milo_ice.jpg" alt="Milo Shaved Ice" />
+          <div class="caption"><span class="name">Milo Shaved Ice</span><span class="price">$6.75</span></div>
+        </div>
+        <div class="slide">
+          <img src="pandan_waffle.jpg" alt="Pandan Waffle" />
+          <div class="caption"><span class="name">Pandan Waffle</span><span class="price">$4.95</span></div>
+        </div>
+        <button class="slide-btn prev" id="slidePrev" aria-label="Previous photo">&#8249;</button>
+        <button class="slide-btn next" id="slideNext" aria-label="Next photo">&#8250;</button>
+        <div class="slide-dots" id="slideDots"></div>
       </div>
     </section>
 
@@ -590,6 +710,60 @@
       <p class="fine">Menu prices in store.</p>
     </div>
   </footer>
+
+  <script>
+    (function () {
+      var box = document.getElementById('slideshow');
+      if (!box) return;
+      var slides = box.querySelectorAll('.slide');
+      var dotsBox = document.getElementById('slideDots');
+      var current = 0;
+      var timer = null;
+
+      function show(i) {
+        current = (i + slides.length) % slides.length;
+        for (var s = 0; s < slides.length; s++) {
+          slides[s].classList.toggle('active', s === current);
+          dotsBox.children[s].classList.toggle('active', s === current);
+        }
+      }
+      function next() { show(current + 1); }
+      function prev() { show(current - 1); }
+      function restart() {
+        clearInterval(timer);
+        timer = setInterval(next, 4000);
+      }
+
+      for (var d = 0; d < slides.length; d++) {
+        var dot = document.createElement('button');
+        dot.setAttribute('aria-label', 'Photo ' + (d + 1));
+        (function (idx) {
+          dot.addEventListener('click', function () { show(idx); restart(); });
+        })(d);
+        dotsBox.appendChild(dot);
+      }
+
+      document.getElementById('slideNext').addEventListener('click', function () { next(); restart(); });
+      document.getElementById('slidePrev').addEventListener('click', function () { prev(); restart(); });
+
+      // Swipe left/right on touch screens
+      var startX = null;
+      box.addEventListener('touchstart', function (e) { startX = e.touches[0].clientX; }, { passive: true });
+      box.addEventListener('touchend', function (e) {
+        if (startX === null) return;
+        var dx = e.changedTouches[0].clientX - startX;
+        if (Math.abs(dx) > 40) { dx < 0 ? next() : prev(); restart(); }
+        startX = null;
+      }, { passive: true });
+
+      // Pause while the visitor holds the mouse over the slideshow
+      box.addEventListener('mouseenter', function () { clearInterval(timer); });
+      box.addEventListener('mouseleave', restart);
+
+      show(0);
+      restart();
+    })();
+  </script>
 
 </body>
 </html>
